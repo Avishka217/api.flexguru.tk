@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/api-flexguru/app/vendor/autoload.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/app/vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 use \Firebase\JWT\Key;
