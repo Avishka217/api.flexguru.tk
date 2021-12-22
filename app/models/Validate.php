@@ -7,6 +7,7 @@ class Validate
 
     public function validate()
     {
+        print_r("check 3");
         return true;
     }
 }

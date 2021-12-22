@@ -9,6 +9,7 @@ class Register
 
     public function register($data)
     {
+        print_r("check 2");
         //Create query
         $this->db->query('INSERT INTO `api`.`user` (`username`, `firstname`, `lastname`, `email`, `password`, `startdate`, `phoneno`, `city`, `role`, `photourl`, `dob`, `subscription`, `gender`) VALUES (:username, :firstname, :lastname, :email, :password, :startdate, :phoneno, :city, :role, :photourl, :dob, :subscription, :gender)');
 
