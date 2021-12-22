@@ -10,7 +10,7 @@ define('DB_NAME', 'api'); //Add your DB Name
 define('APPROOT', dirname(dirname(__FILE__)));
 
 //URLROOT (Dynamic links)
-define('URLROOT', 'https://api.flexguru.tk');
+define('URLROOT', 'https://localhost/api.flexguru.tk');
 
 //Sitename
 define('SITENAME', 'Flexguru API Services');
