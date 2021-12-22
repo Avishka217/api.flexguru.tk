@@ -33,9 +33,9 @@ class User
     {
         $this->userid = $userid;
         //Create query 
-        $this->db->query('SELECT `username`,`firstname`,`lastname`,`email`,`startdate`,`phoneno`,`city`,`role`,`photourl`,`dob`,`subscription`,`gender` from ' . $this->table . 'WHERE userid = :userid');
+        $this->db->query('SELECT `username`,`firstname`,`lastname`,`email`,`startdate`,`phoneno`,`city`,`role`,`photourl`,`dob`,`subscription`,`gender` from ' . $this->table . 'WHERE `user`.`userid`=:id');
         //Bind data
-        $this->db->bind(':userid', $this->userid);
+        $this->db->bind(':id', $userid);
         //Return result set
         return $this->db->resultSet();
     }
