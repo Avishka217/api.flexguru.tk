@@ -72,6 +72,7 @@ class Authentication extends Controller
 
     public function login()
     {
+        echo "check 2";
         if ($_SERVER['REQUEST_METHOD'] = "POST") {
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
             echo "check 1";
