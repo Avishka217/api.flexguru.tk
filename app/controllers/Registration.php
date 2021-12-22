@@ -15,7 +15,6 @@ class Registration extends Controller
         if ($_SERVER['REQUEST_METHOD'] = "POST") {
             $data = json_decode(file_get_contents("php://input"), true);
             if ($validate->validate($data)) {
-                print_r('working');
                 $this->register->register($data);
                 json_encode(array('message' => "User created successfully"));
             } else {
@@ -52,5 +51,10 @@ class Registration extends Controller
         } else {
             json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
+    }
+
+    public function test()
+    {
+        json_encode(array('message' => "Test function working fine!"));
     }
 }
