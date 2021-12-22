@@ -74,7 +74,7 @@ class Authentication extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] = "POST") {
             $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
-
+            echo "check 1";
             $data = json_decode(file_get_contents("php://input"), true);
             $login = $this->model("Login");
             $session = $this->model("Session");
