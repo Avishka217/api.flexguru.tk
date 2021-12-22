@@ -64,6 +64,8 @@ class Authentication extends Controller
                 'refreshExpires' => $refreshexp,
                 'data' => $data
             ));
+        }else{
+            print_r("session creation failed!");
         }
     }
 
