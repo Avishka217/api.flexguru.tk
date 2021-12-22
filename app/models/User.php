@@ -31,11 +31,9 @@ class User
 
     public function getUser($userid)
     {
-        $this->userid = $userid;
         //Create query 
-        $this->db->query('SELECT `username`,`firstname`,`lastname`,`email`,`startdate`,`phoneno`,`city`,`role`,`photourl`,`dob`,`subscription`,`gender` from ' . $this->table . 'WHERE `user`.`userid`=:id');
+        $this->db->query('SELECT `username`,`firstname`,`lastname`,`email`,`startdate`,`phoneno`,`city`,`role`,`photourl`,`dob`,`subscription`,`gender` from ' . $this->table);
         //Bind data
-        $this->db->bind(':id', $userid);
         //Return result set
         return $this->db->resultSet();
     }
