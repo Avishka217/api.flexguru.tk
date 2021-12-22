@@ -102,6 +102,8 @@ class Authentication extends Controller
             } else {
                 echo json_encode(array('message' => 'Invalid operation', 'status' => false));
             }
+        } else {
+            echo json_encode(array('message' => 'REQUEST METHOD INCORRECT'));
         }
     }
 
