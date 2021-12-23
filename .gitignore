@@ -1,2 +1,3 @@
-app\libraries\Auth.php
-app\config\config.php
+/app/libraries/Auth.php
+/app/config/config.php
+/app/controllers/Authentication.php
