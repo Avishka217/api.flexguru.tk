@@ -17,9 +17,9 @@ class Registration extends Controller
             if ($validate->validate($data)) {
                 print_r("check 1");
                 $this->register->register($data);
-                json_encode(array('message' => "User created successfully"));
+                echo json_encode(array('message' => "User created successfully"));
             } else {
-                json_encode(array('message' => 'Something went wront!'));
+                echo json_encode(array('message' => 'Something went wront!'));
             }
         }
     }
@@ -28,9 +28,9 @@ class Registration extends Controller
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if ($this->register->student($data['username'])) {
-            json_encode(array('message' => 'Account created successfully!'));
+            echo json_encode(array('message' => 'Account created successfully!'));
         } else {
-            json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
+            echo json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
     }
 
@@ -38,9 +38,9 @@ class Registration extends Controller
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if ($this->register->tutor($data['username'])) {
-            json_encode(array('message' => 'Account created successfully!'));
+            echo json_encode(array('message' => 'Account created successfully!'));
         } else {
-            json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
+            echo json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
     }
 
@@ -48,14 +48,14 @@ class Registration extends Controller
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if ($this->register->affiliate($data['username'])) {
-            json_encode(array('message' => 'Account created successfully!'));
+            echo json_encode(array('message' => 'Account created successfully!'));
         } else {
-            json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
+            echo json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
     }
 
     public function test()
     {
-        json_encode(array('message' => "Test function working fine!"));
+        echo json_encode(array('message' => "Test function working fine!"));
     }
 }
