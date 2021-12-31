@@ -101,7 +101,7 @@
             </div>
         </div>
         <!-- Rounded Rectangle  -->
-        <div class="hidden md:block h-80 w-2/4 top-32 right-0 lg:-bottom-28 lg:-right-28 overflow-hidden bg-indigo-200 rounded-l-full absolute"></div>
+        <div class="hidden md:block h-80 w-2/4 top-32 right-0 lg:-bottom-28 overflow-hidden bg-indigo-200 rounded-l-full absolute"></div>
     </section>
 
     <!-- Services -->
@@ -119,7 +119,7 @@
                     <img class="w-5/6 h-5/6 sm:w-3/4 sm:h-3/4 md:w-full md:h-full" src="<?php echo URLROOT . "/public/img/services.svg" ?>" alt="Services">
                 </div>
                 <div class="flex flex-1 flex-col items-center lg:items-start">
-                    <h1 class="text-3xl text-indigo-500">Educational information gallery</h1>
+                    <h1 class="text-3xl text-indigo-500 text-center">Educational information gallery</h1>
                     <p class="text-gray-600 my-4 text-center lg:text-left sm:w-3/4 lg:w-full">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis vitae, a assumenda qui distinctio possimus provident aut quia voluptatum necessitatibus nesciunt eius asperiores eos quidem.
                     </p>
