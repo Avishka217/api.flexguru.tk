@@ -1,5 +1,5 @@
 <?php
-class Validate
+class Validate extends Model
 {
     private $db;
     public function __construct()
