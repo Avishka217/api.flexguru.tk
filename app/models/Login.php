@@ -1,5 +1,5 @@
 <?php
-class Login
+class Login extends Model
 {
     private $db;
     private $table = 'user';
