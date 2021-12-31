@@ -22,4 +22,12 @@ class Controller
             die("Request can not be made!");
         }
     }
+
+    public function response($code, $data)
+    {
+        header("content-type: application/json");
+        $response = json_encode(['response' => ['status' => $code, "result" => $data]]);
+        echo $response;
+        exit;
+    }
 }
