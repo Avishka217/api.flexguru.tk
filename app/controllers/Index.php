@@ -9,4 +9,10 @@ class Index extends Controller
     {
         $this->view('home');
     }
+
+    public function test()
+    {
+        $response = $this->model("Main");
+        $response->test();
+    }
 }

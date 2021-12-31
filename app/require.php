@@ -8,6 +8,7 @@ require_once 'libraries/Auth.php';
 
 //Require config file from folder config
 require_once 'config/config.php';
+require_once 'config/constants.php';
 
 //Instantiate the Core class
 $init = new Core();
