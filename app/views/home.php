@@ -34,7 +34,7 @@
     <header>
         <nav class="container flex items-center py-4 mt-4 sm:mt-12">
             <div class="py-1">
-                <h1 class="text-indigo-500 text-2xl">Flexguru</h1>
+                <h1 class="text-indigo-500 text-3xl">Flexguru</h1>
             </div>
             <ul class="
             hidden
@@ -132,7 +132,60 @@
 
             </div>
         </div>
+    </section>
 
+    <!-- Roles -->
+    <section class="py-20 mt-20">
+        <!-- Heading -->
+        <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+            <h1 class="text-3xl text-center text-indigo-500">Join with us</h1>
+            <p class="text-center text-gray-600 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo tempore repellendus vel quae impedit, eligendi eius dolorem, excepturi rem necessitatibus quaerat veritatis repudiandae, consectetur hic.</p>
+        </div>
+        <!-- Cards -->
+        <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 max-w-screen-lg mt-16">
+            <!-- Card 1 -->
+            <div class="flex flex-col rounded-md shadow-md lg:mb-16">
+                <div class="p-6 flex flex-col items-center">
+                    <img src="<?php echo URLROOT . "/public/img/Student.svg" ?>" alt="Student">
+                    <h3 class="mt-5 mb-2 text-indigo-500 text-lg">Student</h3>
+                    <p class="mb-2 text-gray-400 font-light">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <hr class="border-b border-gray-100">
+                <div class="flex p-6">
+                    <button class="flex-1 btn btn-purple hover:bg-gray-100 hover:text-gray-600" type="button">
+                        Join as a Student
+                    </button>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="flex flex-col rounded-md shadow-md lg:my-8">
+                <div class="p-6 flex flex-col items-center">
+                    <img src="<?php echo URLROOT . "/public/img/Tutor.svg" ?>" alt="Student">
+                    <h3 class="mt-5 mb-2 text-indigo-500 text-lg">Tutor</h3>
+                    <p class="mb-2 text-gray-400 font-light">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <hr class="border-b border-gray-100">
+                <div class="flex p-6">
+                    <button class="flex-1 btn btn-purple hover:bg-gray-100 hover:text-gray-600" type="button">
+                        Join as a Tutor
+                    </button>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="flex flex-col rounded-md shadow-md lg:mt-16">
+                <div class="p-6 flex flex-col items-center">
+                    <img src="<?php echo URLROOT . "/public/img/Affiliate.svg" ?>" alt="Student">
+                    <h3 class="mt-5 mb-2 text-indigo-500 text-lg">Affiliate Marketer</h3>
+                    <p class="mb-2 text-gray-400 font-light">Lorem ipsum dolor sit amet.</p>
+                </div>
+                <hr class="border-b border-gray-100">
+                <div class="flex p-6">
+                    <button class="flex-1 btn btn-purple hover:bg-gray-100 hover:text-gray-600" type="button">
+                        Join as a Affiliater
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
 </body>
 
