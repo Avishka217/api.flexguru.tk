@@ -187,6 +187,43 @@
             </div>
         </div>
     </section>
+
+    <!-- FAQ -->
+    <section class="bg-gray-100 py-20">
+        <div class="container">
+            <!-- Heading -->
+            <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+                <h1 class="text-3xl text-center text-indigo-500">Frequently Asked Questions</h1>
+                <p class="text-center text-gray-600 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo tempore repellendus vel quae impedit, eligendi eius dolorem, excepturi rem necessitatibus quaerat veritatis repudiandae, consectetur hic.</p>
+            </div>
+            <!-- FAQ Items -->
+            <div class="flex flex-col sm:w-3/4 lg:w-5/12 m-12 mx-auto">
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <button class="mt-12 flex self-center btn btn-purple hover:bg-gray-100 hover:text-gray-600" type="button">
+                   More Info
+                </button>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>
