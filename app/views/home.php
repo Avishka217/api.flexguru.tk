@@ -187,6 +187,78 @@
             </div>
         </div>
     </section>
+
+    <!-- FAQ -->
+    <section class="bg-gray-100 py-20">
+        <div class="container">
+            <!-- Heading -->
+            <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+                <h1 class="text-3xl text-center text-indigo-500">Frequently Asked Questions</h1>
+                <p class="text-center text-gray-600 mt-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo tempore repellendus vel quae impedit, eligendi eius dolorem, excepturi rem necessitatibus quaerat veritatis repudiandae, consectetur hic.</p>
+            </div>
+            <!-- FAQ Items -->
+            <div class="flex flex-col sm:w-3/4 lg:w-5/12 m-12 mx-auto">
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <div class="flex items-center border-b py-4">
+                    <span class="flex-1 text-gray-600">What is a Bookmark?</span>
+                    <i class="text-gray-600 fas fa-chevron-down"></i>
+                </div>
+                <button class="mt-12 flex self-center btn btn-purple hover:bg-gray-100 hover:text-gray-600" type="button">
+                    More Info
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section class="bg-indigo-500 text-white py-20">
+        <div class="container">
+            <div class="sm:w-3/4 lg:w-2/4 mx-auto">
+                <p class="font-light uppercase text-center mb-8 ">500+ ALREADY JOINED</p>
+                <h1 class="text-3xl text-center">Stay up-to-date with what we're doing</h1>
+                <div class="flex flex-col sm:flex-row gap-6 mt-8">
+                    <input type="text" placeholder="Enter your email address" name="email" id="email" class="focus:outline-none flex-1 px-2 py-3 rounded-md text-gray-600">
+                    <button class="btn bg-orange-600 hover:bg-gray-100 hover:text-gray-700" type="button">
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 py-8">
+        <div class="container flex flex-col md:flex-row items-center">
+            <div class="flex flex-1 flex-wrap items-center justify-center md:justify-start gap-12">
+                <h1 class="text-white text-3xl">Flexguru</h1>
+                <ul class="flex text-white uppercase gap-12 text-xs">
+                    <li class="cursor-pointer">Website</li>
+                    <li class="cursor-pointer">Services</li>
+                    <li class="cursor-pointer">Help</li>
+                    <li class="cursor-pointer">About</li>
+                </ul>
+            </div>
+            <div class="flex gap-10 mt-12 md:mt-0">
+                <i class="text-white text-2xl fab fa-twitter"></i>
+                <i class="text-white text-2xl fab fa-facebook-square"></i>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
