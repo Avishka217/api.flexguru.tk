@@ -240,6 +240,25 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 py-8">
+        <div class="container flex flex-col md:flex-row items-center">
+            <div class="flex flex-1 flex-wrap items-center justify-center md:justify-start gap-12">
+                <h1 class="text-white text-3xl">Flexguru</h1>
+                <ul class="flex text-white uppercase gap-12 text-xs">
+                    <li class="cursor-pointer">Website</li>
+                    <li class="cursor-pointer">Services</li>
+                    <li class="cursor-pointer">Help</li>
+                    <li class="cursor-pointer">About</li>
+                </ul>
+            </div>
+            <div class="flex gap-10 mt-12 md:mt-0">
+                <i class="text-white text-2xl fab fa-twitter"></i>
+                <i class="text-white text-2xl fab fa-facebook-square"></i>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
