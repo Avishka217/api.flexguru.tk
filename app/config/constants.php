@@ -23,3 +23,4 @@ define('SUCCESS_RESPONSE',                         200);
 define('JWT_PROCESSING_ERROR',                    300);
 define('ATHORIZATION_HEADER_NOT_FOUND',            301);
 define('ACCESS_TOKEN_ERRORS',                    302);
+define('SERVER_ERROR',                    500);
