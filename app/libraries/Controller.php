@@ -25,7 +25,7 @@ class Controller
 
     public function response($code, $data)
     {
-        header("content-type: application/json");
+        header('Content-Type: application/json; charset=utf-8');
         $response = json_encode(['response' => ['status' => $code, "result" => $data]]);
         echo $response;
         exit;

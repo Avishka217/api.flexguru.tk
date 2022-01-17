@@ -17,8 +17,10 @@ class Registration extends Controller
             if ($validate->validate($data)) {
                 print_r("check 1");
                 $this->register->register($data);
+                header('Content-Type: application/json; charset=utf-8');
                 echo json_encode(array('message' => "User created successfully"));
             } else {
+                header('Content-Type: application/json; charset=utf-8');
                 echo json_encode(array('message' => 'Something went wront!'));
             }
         }
@@ -28,8 +30,10 @@ class Registration extends Controller
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if ($this->register->student($data['username'])) {
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(array('message' => 'Account created successfully!'));
         } else {
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
     }
@@ -38,8 +42,10 @@ class Registration extends Controller
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if ($this->register->tutor($data['username'])) {
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(array('message' => 'Account created successfully!'));
         } else {
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
     }
@@ -48,14 +54,17 @@ class Registration extends Controller
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if ($this->register->affiliate($data['username'])) {
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(array('message' => 'Account created successfully!'));
         } else {
+            header('Content-Type: application/json; charset=utf-8');
             echo json_encode(array('message' => 'Account creation failed. Contact Admin support.'));
         }
     }
 
     public function test()
     {
+        header('Content-Type: application/json; charset=utf-8');
         echo json_encode(array('message' => "Test function working fine!"));
     }
 }
