@@ -68,8 +68,21 @@ class SpecialServiceRequest extends Model
     {
     }
 
-    public function getSpecialRequests()
+    public function getSpecialRequests($studentid)
     {
+        $data = [];
+        $this->db->query("SELECT * FROM specialrequestmessage srm INNER join specialservicerequest ssr ON srm.serviceid = ssr.serviceid and ssr.studentid = :studentid");
+        $this->db->bind(':studentid', $studentid);
+        $this->db->execute();
+        $messageArray = $this->db->resultSet();
+        foreach ($messageArray as $item) {
+            $this->db->query("SELECT * FROM specialrequestresponse WHERE serviceid = :serviceid");
+            $this->db->bind(':serviceid', $item['serviceid']);
+            $this->db->execute();
+            $responseArray = $this->db->resultSet();
+            array_push($data, array("serviceID" => $item['serviceid'], "message" => $item, "responses" => $responseArray));
+        }
+        return $data;
     }
 
     //Message CRUD
@@ -141,5 +154,22 @@ class SpecialServiceRequest extends Model
     }
     public function deleteRequest()
     {
+    }
+
+    //Response CRUD
+
+    public function createResponse($data, $tutorid)
+    {
+        $this->db->query("INSERT INTO `api`.`specialrequestresponse` (`description`, `deadline`, `fee`, `serviceid`, `tutorid`) VALUES (:description, :deadline, :fee, :serviceid, :tutorid)");
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':deadline', $data['deadline']);
+        $this->db->bind(':fee', $data['fee']);
+        $this->db->bind(':serviceid', $data['serviceid']);
+        $this->db->bind(':tutorid', $tutorid);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

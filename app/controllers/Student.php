@@ -42,4 +42,15 @@ class Student extends Controller
             }
         }
     }
+
+    public function getSpecialRequests()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            $ssr = $this->model('SpecialServiceRequest');
+            $data = $ssr->getSpecialRequests($this->id);
+            $this->response(SUCCESS_RESPONSE, $data);
+        } else {
+            $this->response(SERVER_ERROR, array('error' => 'INTERNAL SERVER ERROR'));
+        }
+    }
 }
