@@ -38,4 +38,17 @@ class Tutor extends Controller
             }
         }
     }
+
+    public function createservicegig()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $serviceGig = $this->model('ServiceGig');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($serviceGig->addServiceGig($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("result" => "Gig added successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("result" => "Something went wrong!"));
+            }
+        }
+    }
 }
