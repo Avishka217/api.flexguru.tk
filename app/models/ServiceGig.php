@@ -29,16 +29,27 @@ class ServiceGig extends Model
 
     public function getAllGigs()
     {
-        $this->db->query("SELECT gigid, tu.tuid, title, price, revisions, duration, subject, image, rating, jobs, level, username, firstname, lastname, photourl  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = tu.tuid and tu.userid = user.userid;");
+        $this->db->query("SELECT gigid, tu.tuid, tu.verified, title, price, revisions, duration, sg.status, subject, image, rating, jobs, level, username, firstname, lastname, photourl  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = tu.tuid and tu.userid = user.userid;");
         $results = $this->db->resultSet();
         return $results;
     }
 
     public function getASingleGig($data)
     {
-        $this->db->query("SELECT gigid, tu.tuid, tu.verified title, price, revisions, duration, subject, image, rating, jobs, level, username, firstname, lastname, photourl  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = tu.tuid and tu.userid = user.userid where gigid = :gigid;");
+        $this->db->query("SELECT gigid, tu.tuid, tu.verified, title, price, revisions, duration, sg.status, subject, image, rating, jobs, level, username, firstname, lastname, photourl  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = tu.tuid and tu.userid = user.userid where gigid = :gigid;");
         $this->db->bind(':gigid', $data['gigid']);
         $results = $this->db->resultSet();
         return $results;
+    }
+
+    public function getGigsByTutorID($data)
+    {
+        $this->db->query("SELECT gigid, tu.tuid, tu.verified, title, price, revisions, duration, sg.status, subject, image, rating, jobs, level, username, firstname, lastname, photourl  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = :tuid and tu.userid = user.userid and tu.tuid = :tuid;");
+        $this->db->bind(':tuid', $data['tuid']);
+        if ($results = $this->db->resultSet()) {
+            return $results;
+        } else {
+            return false;
+        }
     }
 }
