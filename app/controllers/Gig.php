@@ -36,10 +36,10 @@ class Gig extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = json_decode(file_get_contents("php://input"), true);
-            if ($this->model('Service')->delete($data, $this->id)) {
-                $this->response(SUCCESS_RESPONSE, array('message' => 'Services Message Deleted Successfully.'));
+            if ($this->model('Service')->delete($data)) {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Service Deleted Successfully.'));
             } else {
-                $this->response(SERVER_ERROR, array('message' => 'Services Message Failed.'));
+                $this->response(SERVER_ERROR, array('message' => 'Service Deleting Failed.'));
             }
         }
     }
