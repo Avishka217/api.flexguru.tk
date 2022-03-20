@@ -31,18 +31,18 @@ class Service extends Model
         }
     }
 
-    public function delete($gigid, $tutorid)
+    public function delete($data)
     {
 
         // Check if the user is the owner of the gig
         $this->db->query("SELECT * FROM " . $this->table . " WHERE gigid = :gigid AND tuid = :tuid");
-        $this->db->bind(':gigid', $gigid['gigid']);
-        $this->db->bind(':tuid', $tutorid);
+        $this->db->bind(':gigid', $data['gigid']);
+        $this->db->bind(':tuid', $data['tuid']);
         $this->db->execute();
 
         if ($this->db->rowCount() > 0) {
             $this->db->query("DELETE FROM " . $this->table . " WHERE gigid = :gigid");
-            $this->db->bind(':gigid', $gigid['gigid']);
+            $this->db->bind(':gigid', $data['gigid']);
             // Execute
             if ($this->db->execute()) {
                 return true;
