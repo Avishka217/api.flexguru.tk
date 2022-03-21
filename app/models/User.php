@@ -42,7 +42,7 @@ class User extends Model
     public function updateDP($data, $userid)
     {
         //Create query
-        $this->db->query('UPDATE ' . $this->table . ' SET `photourl`=:photourl and `bio`=:bio WHERE `userid`=:userid');
+        $this->db->query('UPDATE ' . $this->table . ' SET `photourl` = :photourl, `bio` = :bio WHERE `userid` = :userid');
         //Bind data
         $this->db->bind(':photourl', $data['photourl']);
         $this->db->bind(':userid', $userid);
