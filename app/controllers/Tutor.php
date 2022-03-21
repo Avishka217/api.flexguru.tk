@@ -58,7 +58,7 @@ class Tutor extends Controller
             $data = json_decode(file_get_contents("php://input"), true);
             $tutor = $this->model('User');
 
-            if ($tutor->updateDP($data, $this->id)) {
+            if ($tutor->updatePicture($data)) {
                 $this->response(SUCCESS_RESPONSE, array('success' => 'Profile Picture Updated Successfully.'));
             } else {
                 $this->response(SERVER_ERROR, array('error' => 'Profile Picture Failed.'));
