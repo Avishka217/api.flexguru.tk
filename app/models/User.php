@@ -38,4 +38,21 @@ class User extends Model
         //Return result set
         return $this->db->resultSet();
     }
+
+    public function updateDP($data, $userid)
+    {
+        //Create query
+        $this->db->query('UPDATE ' . $this->table . ' SET `photourl`=:photourl and `bio`=:bio WHERE `userid`=:userid');
+        //Bind data
+        $this->db->bind(':photourl', $data['photourl']);
+        $this->db->bind(':userid', $userid);
+        $this->db->bind(':bio', $data['bio']);
+
+        //Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

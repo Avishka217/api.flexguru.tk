@@ -51,4 +51,18 @@ class Tutor extends Controller
             }
         }
     }
+
+    public function updateDP()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $tutor = $this->model('User');
+
+            if ($tutor->updateDP($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array('success' => 'Profile Picture Updated Successfully.'));
+            } else {
+                $this->response(SERVER_ERROR, array('error' => 'Profile Picture Failed.'));
+            }
+        }
+    }
 }
