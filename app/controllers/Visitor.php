@@ -17,8 +17,12 @@ class Visitor extends Controller
         if ($_SERVER['REQUEST_METHOD'] = "POST") {
             $data = json_decode(file_get_contents("php://input"), true);
             $gig = $this->model('ServiceGig');
-            if ($res = $gig->getGigsByTutorID($data)) {
+            $res = $gig->getGigsByTutorID($data);
+
+            if (!empty($res)) {
                 $this->response(SUCCESS_RESPONSE, $res);
+            } else {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'No Services Found.'));
             }
         }
     }
