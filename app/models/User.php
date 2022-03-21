@@ -41,6 +41,8 @@ class User extends Model
 
     public function updatePicture($data)
     {
+
+        print_r($data);
         //Create query
         $this->db->query('UPDATE `api`.`user` SET `photourl` = :photourl, `bio` = :bio WHERE `userid` = :userid');
         //Bind data
