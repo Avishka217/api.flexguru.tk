@@ -39,26 +39,11 @@ class Tutor extends Controller
         }
     }
 
-    public function createservicegig()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $serviceGig = $this->model('ServiceGig');
-            $data = json_decode(file_get_contents("php://input"), true);
-            if ($serviceGig->addServiceGig($data, $this->id)) {
-                $this->response(SUCCESS_RESPONSE, array("result" => "Gig added successfully!"));
-            } else {
-                $this->response(SERVER_ERROR, array("result" => "Something went wrong!"));
-            }
-        }
-    }
-
     public function updateDP()
     {
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        if ($_SERVER['REQUEST_METHOD'] = "POST") {
             $data = json_decode(file_get_contents("php://input"), true);
-            $tutor = $this->model('User');
-
-            if ($tutor->updatePicture($data)) {
+            if ($this->model('User')->updatePicture($data)) {
                 $this->response(SUCCESS_RESPONSE, array('message' => 'Profile Picture Updated Successfully.'));
             } else {
                 $this->response(SERVER_ERROR, array('message' => 'Profile Picture Failed.'));
