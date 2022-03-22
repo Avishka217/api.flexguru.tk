@@ -37,7 +37,7 @@ class ServiceGig extends Model
 
     public function getGigByGigID($data)
     {
-        $this->db->query("SELECT gigid, tu.tuid, tu.verified, title, price, revisions, description, duration, method, medium, sg.status, subject, image, rating, jobs, level, username, firstname, lastname, photourl, workplace, occupation, bio  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = tu.tuid and tu.userid = user.userid and gigid = :gigid;");
+        $this->db->query("SELECT gigid, tu.tuid, tu.verified, title, price, revisions, description, duration, method, medium, sg.status, subject, image, rating, jobs, level, username, firstname, lastname, photourl, workplace, occupation, user.bio  FROM api.servicegig sg, api.tutor tu, api.user where sg.tuid = tu.tuid and tu.userid = user.userid and gigid = :gigid;");
         $this->db->bind(':gigid', $data['gigid']);
         if ($results = $this->db->resultSet()) {
             return $results;
