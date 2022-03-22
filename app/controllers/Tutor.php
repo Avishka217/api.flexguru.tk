@@ -59,9 +59,9 @@ class Tutor extends Controller
             $tutor = $this->model('User');
 
             if ($tutor->updatePicture($data)) {
-                $this->response(SUCCESS_RESPONSE, array('success' => 'Profile Picture Updated Successfully.'));
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Profile Picture Updated Successfully.'));
             } else {
-                $this->response(SERVER_ERROR, array('error' => 'Profile Picture Failed.'));
+                $this->response(SERVER_ERROR, array('message' => 'Profile Picture Failed.'));
             }
         }
     }
