@@ -5,7 +5,7 @@ class Affiliate extends Controller
     {
         $auth = new Auth;
         $this->session = $auth->authorized();
-        if (isset($this->session[0]["id"]) && $this->session[0]["affiliatemarketer"] == 1) {
+        if (isset($this->session[0]["id"]) && $this->session[0]["affiliate"] == 1) {
             $this->id = $this->session[0]["id"];
         } else {
             $data = array('error' => 'INVALID ACCESS');
@@ -16,7 +16,6 @@ class Affiliate extends Controller
 
     public function index()
     {
-        
     }
 
 
