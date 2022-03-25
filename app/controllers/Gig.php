@@ -25,9 +25,9 @@ class Gig extends Controller
             $data = json_decode(file_get_contents("php://input"), true);
             // $this->response(SUCCESS_RESPONSE, $data);
             if ($this->model('Service')->create($data)) {
-                $this->response(SUCCESS_RESPONSE, array('success' => 'Services Message Added Successfully.'));
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Services Message Added Successfully.'));
             } else {
-                $this->response(SERVER_ERROR, array('error' => 'Services Message Failed.'));
+                $this->response(SERVER_ERROR, array('message' => 'Services Message Failed.'));
             }
         }
     }
@@ -36,10 +36,12 @@ class Gig extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = json_decode(file_get_contents("php://input"), true);
-            if ($this->model('Service')->delete($data, 48)) {
-                $this->response(SUCCESS_RESPONSE, array('success' => 'Services Message Deleted Successfully.'));
+
+            if ($this->model('Service')->delete($data)) {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Service Deleted Successfully.'));
+
             } else {
-                $this->response(SERVER_ERROR, array('error' => 'Services Message Failed.'));
+                $this->response(SERVER_ERROR, array('message' => 'Service Deleting Failed.'));
             }
         }
     }

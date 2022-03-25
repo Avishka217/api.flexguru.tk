@@ -34,4 +34,20 @@ class User extends Model
         return $this->db->resultSet();
     }
 
+    public function updatePicture($data)
+    {
+        //Create query
+        $this->db->query('UPDATE `api`.`user` SET `photourl` = :photourl, `bio` = :bio WHERE `userid` = :userid');
+        //Bind data
+        $this->db->bind(':photourl', $data['photourl']);
+        $this->db->bind(':userid', $data['userid']);
+        $this->db->bind(':bio', $data['bio']);
+
+        //Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

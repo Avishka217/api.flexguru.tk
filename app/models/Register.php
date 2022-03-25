@@ -9,7 +9,6 @@ class Register extends Model
 
     public function register($data)
     {
-        print_r("check 2");
         //Create query
         $this->db->query('INSERT INTO `api`.`user` (`username`, `firstname`, `lastname`, `email`, `password`, `startdate`, `phoneno`, `city`, `role`, `photourl`, `dob`, `subscription`, `gender`) VALUES (:username, :firstname, :lastname, :email, :password, :startdate, :phoneno, :city, :role, :photourl, :dob, :subscription, :gender)');
 
@@ -30,56 +29,51 @@ class Register extends Model
 
         //Execute function
         if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+            if ($data['role'] == 'tu') {
+                // register tutor
+                //Create query
+                $this->db->query('INSERT INTO `api`.`tutor` (`userid`) SELECT `userid` FROM `api`.`user` WHERE username = :username');
 
-    public function student($username)
-    {
-        //Create query
-        $this->db->query('INSERT INTO `api`.`student` (`userid`)  VALUES((SELECT `userid` FROM `api`.`user` WHERE username = :username))');
+                //Bind data
+                $this->db->bind(':username', $data['username']);
 
-        //Bind data
-        $this->db->bind(':username', $username);
+                //Execute function 
+                if ($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if ($data['role'] == 'af') {
+                // register affiliate
+                //Create query
+                $this->db->query('INSERT INTO `api`.`affiliatemarketer` (`userid`, `affiliatelink`)  VALUES((SELECT `userid` FROM `api`.`user` WHERE username = :username),:affiliatelink)');
 
-        //Execute function
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+                //Bind data
+                $this->db->bind(':username', $data['username']);
+                $this->db->bind(':affiliatelink', uniqid('', true));
 
-    public function affiliate($username)
-    {
-        //Create query
-        $this->db->query('INSERT INTO `api`.`affiliatemarketer` (`userid`, `affiliatelink`)  VALUES((SELECT `userid` FROM `api`.`user` WHERE username = :username),:affiliatelink)');
+                //Execute function
+                if ($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if ($data['role'] == 'st') {
+                //Create query
+                $this->db->query('INSERT INTO `api`.`student` (`userid`)  VALUES((SELECT `userid` FROM `api`.`user` WHERE username = :username))');
 
-        //Bind data
-        $this->db->bind(':username', $username);
-        $this->db->bind(':affiliatelink', uniqid('', true));
+                //Bind data
+                $this->db->bind(':username', $data['username']);
 
-        //Execute function
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function tutor($username)
-    {
-        //Create query
-        $this->db->query('INSERT INTO `api`.`tutor` (`userid`) SELECT `userid` FROM `api`.`user` WHERE username = :username');
-
-        //Bind data
-        $this->db->bind(':username', $username);
-
-        //Execute function 
-        if ($this->db->execute()) {
-            return true;
+                //Execute function
+                if ($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

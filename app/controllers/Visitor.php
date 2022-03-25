@@ -11,4 +11,34 @@ class Visitor extends Controller
         $data = $gig->getAllGigs();
         $this->response(SUCCESS_RESPONSE, $data);
     }
+
+    public function servicesbytutor()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = "POST") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $gig = $this->model('ServiceGig');
+            $res = $gig->getGigsByTutorID($data);
+
+            if (!empty($res)) {
+                $this->response(SUCCESS_RESPONSE, $res);
+            } else {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'No Services Found.'));
+            }
+        }
+    }
+
+    public function servicebygig()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = "POST") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $gig = $this->model('ServiceGig');
+            $res = $gig->getGigByGigID($data);
+
+            if (!empty($res)) {
+                $this->response(SUCCESS_RESPONSE, $res);
+            } else {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'This service not exists or deleted by the tutor.'));
+            }
+        }
+    }
 }
