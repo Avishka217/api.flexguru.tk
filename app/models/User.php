@@ -1,10 +1,8 @@
 <?php
 class User extends Model
 {
-
     private $db;
     private $table = 'user';
-
     //user properties
     public $userid;
     public $username;
@@ -16,19 +14,16 @@ class User extends Model
     public $city;
     public $role;
     public $photourl;
-
     public function __construct()
     {
         $this->db = new Database;
     }
-
     public function read()
     {
         //Create query
         $this->db->query('SELECT * from ' . $this->table);
         return $this->db->resultSet();
     }
-
     public function getUser($userid)
     {
         //Create query 
@@ -38,4 +33,5 @@ class User extends Model
         //Return result set
         return $this->db->resultSet();
     }
+
 }
