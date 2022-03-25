@@ -45,4 +45,15 @@ class ServiceGig extends Model
             return false;
         }
     }
+
+    public function getGig($data)
+    {
+        $this->db->query("SELECT * FROM " . $this->table . " WHERE gigid = :gigid");
+        $this->db->bind(':gigid', $data);
+        if ($results = $this->db->resultSet()) {
+            return $results;
+        } else {
+            return false;
+        }
+    }
 }
