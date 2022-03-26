@@ -132,4 +132,22 @@ class Tutor extends Controller
             }
         }
     }
+
+
+    public function addcomplaint()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->addcomplaint($data, 38)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Complaint added successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    }
+
+
+
+
 }
