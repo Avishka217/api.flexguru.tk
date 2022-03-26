@@ -115,4 +115,90 @@ class OrderModel extends Model
             return false;
         }
     }
+
+    public function studentfeedback($data, $studentuserid)
+    {
+        try {
+            //Update class query
+            $this->db->query('UPDATE api.class cls SET `status`="completed", `turating` = :turating, `tureview` = :tureview where cls.stuid = (select u.stid from api.student u where u.userid = :userid) and cls.classid = :classid');
+
+            //Bind values
+            $this->db->bind(':classid', $data['classid']);
+            $this->db->bind(':turating', $data['turating']);
+            $this->db->bind(':tureview', $data['tureview']);
+            $this->db->bind(':userid', $studentuserid);
+            //Execute function
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function tutorfeedback($data, $studentuserid)
+    {
+        try {
+            //Update class query
+            $this->db->query('UPDATE api.class cls SET `status`="completed", `sturating` = :sturating, `streview` = :streview where cls.tutid = (select u.tuid from api.tutor u where u.userid = :userid) and cls.classid = :classid');
+
+            //Bind values
+            $this->db->bind(':classid', $data['classid']);
+            $this->db->bind(':sturating', $data['sturating']);
+            $this->db->bind(':streview', $data['streview']);
+            $this->db->bind(':userid', $studentuserid);
+            //Execute function
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function askrevision($data, $studentuserid)
+    {
+        try {
+            //Update class query
+            $this->db->query('UPDATE api.class cls SET `status`="in-progress", `revisionphase` = `revisionphase` + 1, `reviewphase` = 0 where cls.stuid = (select u.stid from api.student u where u.userid = :userid) and cls.classid = :classid');
+
+            //Bind values
+            $this->db->bind(':classid', $data['classid']);
+            $this->db->bind(':userid', $studentuserid);
+            //Execute function
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function askforreview($data, $tutoruserid)
+    {
+        try {
+            //Update class query
+            $this->db->query('UPDATE api.class cls SET `reviewphase` = 1, `reviewdeadline` = :reviewdeadline where cls.tutid = (select u.tuid from api.tutor u where u.userid = :userid) and cls.classid = :classid');
+
+            //Bind values
+            $this->db->bind(':classid', $data['classid']);
+            $this->db->bind(':userid', $tutoruserid);
+            $this->db->bind(':reviewdeadline', date('Y-m-d H:i:s', strtotime(date('Y-m-d H:i:s') . ' +2 day')));
+
+            //Execute function
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

@@ -65,4 +65,30 @@ class Order extends Controller
             }
         }
     }
+
+    public function studentfeedback()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $result = $this->model('OrderModel')->studentfeedback($data, $this->id);
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, true);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this data."));
+            }
+        }
+    }
+
+    public function askrevision()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $result = $this->model('OrderModel')->askrevision($data, $this->id);
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, true);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this data."));
+            }
+        }
+    }
 }
