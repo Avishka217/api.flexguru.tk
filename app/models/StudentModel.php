@@ -63,6 +63,60 @@ class StudentModel extends Model
 
 
 
+       public function contactnumberchange($data, $userid)
+          {
+
+                  $this->db->query("UPDATE user SET phoneno = :phoneno WHERE userid = :userid");
+                  $this->db->bind(":userid", $userid);
+                  $this->db->bind(":phoneno", $data['contactnumber']);
+                  if ($this->db->execute()) {
+                      return true;
+                  } else {
+                      return false;
+                  }
+              }
+
+
+
+          public function emailchange($data, $userid)
+             {
+
+                     $this->db->query("UPDATE user SET email = :email WHERE userid = :userid");
+                     $this->db->bind(":userid", $userid);
+                     $this->db->bind(":email", $data['email']);
+                     if ($this->db->execute()) {
+                         return true;
+                     } else {
+                         return false;
+                     }
+                 }
+
+                 public function deleteaccount($data, $userid)
+                    {
+                            $this->db-query("SELECT phoneno,email from user where userid=:userid");
+                            $this->db->bind(":userid",$userid);
+                            $response = $this->db->resultSet();
+                            $email = $response['email'];
+                            $phoneno = $response['phoneno'];
+                            $this->db->query("INSERT INTO accountdeleterequests (userid,email,contactnumber,complaint) values (:userid , :complaint , :email ,:contactnumber)");
+                            $this->db->bind(":userid", $userid);
+                            $this->db->bind(":complaint", $data['deletereason']);
+                              $this->db->bind(":email", $email);
+                                $this->db->bind(":contactnumber", $phoneno);
+                            if ($this->db->execute()) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+
+
+
+
+
+
+
+
 
 
 

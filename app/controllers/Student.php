@@ -81,6 +81,50 @@ class Student extends Controller
     }
 
 
+        public function emailchange()
+        {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+                $student = $this->model('StudentModel');
+                $data = json_decode(file_get_contents("php://input"), true);
+                if ($student->emailchange($data, $this->id)) {
+                    $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+                } else {
+                    $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
+                }
+            }
+        }
+
+
+        public function contactnumberchange()
+        {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+              $student = $this->model('StudentModel');
+                $data = json_decode(file_get_contents("php://input"), true);
+                if ($student->contactnumberchange($data, $this->id)) {
+                    $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+                } else {
+                    $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+                }
+            }
+        }
+
+
+
+        public function deleteaccount()
+        {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
+              $student = $this->model('StudentModel');
+                $data = json_decode(file_get_contents("php://input"), true);
+                if ($student->deleteaccount($data, $this->id)) {
+                    $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+                } else {
+                    $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+                }
+            }
+        }
+
+
+
 
 
 
