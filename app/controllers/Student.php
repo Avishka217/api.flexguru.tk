@@ -65,7 +65,20 @@ class Student extends Controller
                 $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
             }
         }
-    } 
+    }
+
+    public function passwordchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $student = $this->model('StudentModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($student->passwordchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
+            }
+        }
+    }
 
 
 

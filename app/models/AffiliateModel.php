@@ -38,4 +38,26 @@ class AffiliateModel extends Model
     }
 
 
+    public function passwordchange($data, $userid)
+       {
+
+           $this->db->query("SELECT * FROM user where userid = :userid AND password= :password");
+           //Bind data
+           $this->db->bind(":userid", $userid);
+           $this->db->bind(":password", $data['password']);
+
+           $this->db->execute();
+           if ($this->db->rowCount() == 1) {
+               $this->db->query("UPDATE user SET password = :password WHERE userid = :userid");
+               $this->db->bind(":userid", $userid);
+               $this->db->bind(":password", $data['newpassword']);
+               if ($this->db->execute()) {
+                   return true;
+               } else {
+                   return false;
+               }
+           }
+       }
+
+
 }

@@ -19,15 +19,8 @@ class TutorModel extends Model
         return $this->db->resultSet();
     }
 
- public function passwordchange($data, $tuid)
+ public function passwordchange($data, $userid)
     {
-
-        // using tuid get the userid
-        $this->db->query("SELECT userid FROM ".$this->table." where tuid = :tuid");
-        $this->db->bind(":tuid", $tuid);
-        $res = $this->db->resultSet();
-        $userid = $res[0]['userid'];
-       
 
         $this->db->query("SELECT * FROM user where userid = :userid AND password= :password");
         //Bind data
@@ -35,7 +28,7 @@ class TutorModel extends Model
         $this->db->bind(":password", $data['password']);
 
         $this->db->execute();
-        if ($this->db->rowCount() > 0) {
+        if ($this->db->rowCount() == 1) {
             $this->db->query("UPDATE user SET password = :password WHERE userid = :userid");
             $this->db->bind(":userid", $userid);
             $this->db->bind(":password", $data['newpassword']);
@@ -69,7 +62,7 @@ class TutorModel extends Model
                 return true;
             } else {
                 return false;
-            }   
+            }
     }
 }
 
@@ -91,14 +84,14 @@ class TutorModel extends Model
         } else {
             return false;
         }
-        
+
     }
 
 
     public function addcomplaint($data, $userid)
     {
 
-     
+
         $this->db->query("INSERT INTO complaint (userid,email,contactnumber,complainttype,complaint) VALUES (:userid , :email ,:contactnumber,:complainttype, :complaint )");
         //Bind data
         $this->db->bind(":userid", $userid);
