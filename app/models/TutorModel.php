@@ -95,21 +95,17 @@ class TutorModel extends Model
     }
 
 
-    public function addcomplaint($data, $tuid)
+    public function addcomplaint($data, $userid)
     {
 
-        $this->db->query("SELECT userid FROM " . $this->table . " where tuid = :tuid");
-        $this->db->bind(":tuid", $tuid);
-        $res = $this->db->resultSet();
-        $userid = $res[0]['userid'];
-
-        $this->db->query("INSERT INTO complaint (userid,email,contactnumber,complainttype,complaintdate,complaint) VALUES (:userid , :email ,:contactnumber,:complainttype ,:complaintdate, :complaint, )");
+     
+        $this->db->query("INSERT INTO complaint (userid,email,contactnumber,complainttype,complaint) VALUES (:userid , :email ,:contactnumber,:complainttype, :complaint )");
         //Bind data
         $this->db->bind(":userid", $userid);
         $this->db->bind(":contactnumber",$data['contactnumber']);
         $this->db->bind(":email", $data['email']);
         $this->db->bind(":complainttype", $data['complainttype']);
-        $this->db->bind(":complaintdate", $data['complaintdate']);
+        // $this->db->bind(":complaintdate", $data['complaintdate']);
         $this->db->bind(":complaint", $data['complaint']);
         //Execute
         if ($this->db->execute()) {

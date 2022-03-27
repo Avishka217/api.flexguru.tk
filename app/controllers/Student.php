@@ -53,4 +53,25 @@ class Student extends Controller
             $this->response(SERVER_ERROR, array('error' => 'INTERNAL SERVER ERROR'));
         }
     }
+
+    public function addcomplaint()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $student = $this->model('StudentModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($student->addcomplaint($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Complaint added successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    } 
+
+
+
+
+
+
+
+
 }
