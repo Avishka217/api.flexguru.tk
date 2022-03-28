@@ -18,5 +18,77 @@ class Affiliate extends Controller
     {
     }
 
+    public function addcomplaint()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $affiliate = $this->model('AffiliateModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($affiliate->addcomplaint($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Complaint added successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    }
+
+    public function passwordchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $affiliate = $this->model('AffiliateModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($affiliate->passwordchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+    public function emailchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $affiliate = $this->model('AffiliateModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($affiliate->emailchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+    public function contactnumberchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $affiliate = $this->model('AffiliateModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($affiliate->contactnumberchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+
+    public function deleteaccount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $affiliate = $this->model('AffiliateModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($affiliate->deleteaccount($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+
+
 
 }

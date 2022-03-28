@@ -50,4 +50,178 @@ class Tutor extends Controller
             }
         }
     }
+
+    public function tutorclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $result = $this->model('OrderModel')->tutorclasses($data, $this->id);
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, $result);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this data."));
+            }
+        }
+    }
+
+    public function class()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = "POST") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $order = $this->model('OrderModel');
+            $res = $order->getclass($data, $this->id);
+            $student = $this->model('User')->getUser($res[0]['studentuserid']);
+            $tutor = $this->model('User')->getUser($res[0]['tutoruserid']);
+            $gig = $this->model('ServiceGig')->getGig($res[0]['gigid']);
+
+            $array = [
+                'class' => (array)$res[0],
+                'student' => (array)$student[0],
+                'tutor' => (array)$tutor[0],
+                'gig' => (array)$gig[0]
+            ];
+
+            if ($res && $res[0]['tutoruserid'] == $this->id) {
+                $this->response(SUCCESS_RESPONSE, $array);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this class."));
+            }
+        }
+    }
+
+    public function acceptclass()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = "POST") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $order = $this->model('OrderModel');
+            $res = $order->getclass(['classid' => $data], $this->id);
+            if ($res && $res[0]['tutoruserid'] == $this->id) {
+                if ($order->acceptclass($data)) {
+                    $this->response(SUCCESS_RESPONSE, array('message' => 'Class Accepted Successfully.'));
+                } else {
+                    $this->response(SERVER_ERROR, array('message' => 'Class Accept Failed.'));
+                }
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this class."));
+            }
+        }
+    }
+
+    public function askforreview()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $result = $this->model('OrderModel')->askforreview($data, $this->id);
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, true);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this data."));
+            }
+        }
+    }
+
+    public function tutorfeedback()
+    {
+        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $result = $this->model('OrderModel')->tutorfeedback($data, $this->id);
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, true);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "You don't have access to this data."));
+            }
+        }
+    }
+
+
+    public function addcomplaint()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->addcomplaint($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Complaint added successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    }
+
+
+    public function passwordchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->passwordchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+
+    public function emailchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+              $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->emailchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+    public function contactnumberchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+          $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->contactnumberchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+
+    public function deleteaccount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->deleteaccount($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Account Delete request received Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Operation Unsuccessful. Please try again"));
+            }
+        }
+    }
+
+    public function getTutor()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $tutor = $this->model('TutorModel');
+            $tutorresult = $tutor->getTutor($this->id);
+            $classresult = $tutor->getClassDetails($this->id);
+            $reviews = $tutor->getTutorReviews($this->id);
+            $result = [
+                'tutor' => $tutorresult,
+                'class' => $classresult,
+                'reviews' => $reviews
+            ];
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, $result);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "Something went wrong!"));
+            }
+        }
+    }
 }
