@@ -166,7 +166,7 @@ class Tutor extends Controller
     public function emailchange()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-              $tutor = $this->model('TutorModel');
+            $tutor = $this->model('TutorModel');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($tutor->emailchange($data, $this->id)) {
                 $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
@@ -180,7 +180,7 @@ class Tutor extends Controller
     public function contactnumberchange()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-          $tutor = $this->model('TutorModel');
+            $tutor = $this->model('TutorModel');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($tutor->contactnumberchange($data, $this->id)) {
                 $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
