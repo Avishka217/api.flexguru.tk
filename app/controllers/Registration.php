@@ -49,6 +49,19 @@ class Registration extends Controller
         }
     }
 
+    public function tutregister()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $tutor = $this->model('TutorModel');
+            if ($tutor->register($data)) {
+                $this->response(SUCCESS_RESPONSE, array('success' => 'Tutor Verification Details Sent Successfully.'));
+            } else {
+                $this->response(SERVER_ERROR, array('error' => 'Verification Phase Skipped.'));
+            }
+        }
+    }
+
     public function affiliate()
     {
         $data = json_decode(file_get_contents("php://input"), true);

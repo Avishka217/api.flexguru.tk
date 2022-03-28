@@ -9,6 +9,23 @@ class TutorModel extends Model
         $this->db = new Database;
     }
 
+    public function register($data)
+    {
+        // update query to update register data in tutor table
+        $this->db->query("UPDATE api.tutor tu SET subjects=:subjects, workplace = :workplace, occupation = :occupation, qualification = :qualification, files = :files where tu.userid = (select userid from api.user u where u.username = :username);");
+        $this->db->bind(':username', $data[1]);
+        $this->db->bind(':subjects', $data[2]["subjects"]);
+        $this->db->bind(':workplace', $data[2]["workplace"]);
+        $this->db->bind(':occupation', $data[2]["occupation"]);
+        $this->db->bind(':qualification', $data[2]["qualification"]);
+        $this->db->bind(':files', $data[0]);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getTutorByUserID($userid)
     {
         //Query
@@ -89,32 +106,32 @@ class TutorModel extends Model
     }
 
     public function contactnumberchange($data, $userid)
-       {
+    {
 
-               $this->db->query("UPDATE user SET phoneno = :phoneno WHERE userid = :userid");
-               $this->db->bind(":userid", $userid);
-               $this->db->bind(":phoneno", $data['contactnumber']);
-               if ($this->db->execute()) {
-                   return true;
-               } else {
-                   return false;
-               }
-           }
+        $this->db->query("UPDATE user SET phoneno = :phoneno WHERE userid = :userid");
+        $this->db->bind(":userid", $userid);
+        $this->db->bind(":phoneno", $data['contactnumber']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 
-       public function emailchange($data, $userid)
-          {
+    public function emailchange($data, $userid)
+    {
 
-                  $this->db->query("UPDATE user SET email = :email WHERE userid = :userid");
-                  $this->db->bind(":userid", $userid);
-                  $this->db->bind(":email", $data['email']);
-                  if ($this->db->execute()) {
-                      return true;
-                  } else {
-                      return false;
-                  }
-              }
+        $this->db->query("UPDATE user SET email = :email WHERE userid = :userid");
+        $this->db->bind(":userid", $userid);
+        $this->db->bind(":email", $data['email']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function deleteaccount($data, $userid)
     {
@@ -164,5 +181,4 @@ class TutorModel extends Model
         $this->db->execute();
         return $this->db->resultSet();
     }
-
 }
