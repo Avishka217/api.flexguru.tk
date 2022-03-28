@@ -161,28 +161,46 @@ class Tutor extends Controller
         }
     }
 
-    public function generaldetailschange()
+
+
+    public function emailchange()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $tutor = $this->model('TutorModel');
+              $tutor = $this->model('TutorModel');
             $data = json_decode(file_get_contents("php://input"), true);
-            if ($tutor->generaldetailschange($data, $this->id)) {
-                $this->response(SUCCESS_RESPONSE, array("message" => "General Details Changed Successfully"));
+            if ($tutor->emailchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
             } else {
-                $this->response(SUCCESS_RESPONSE, array("message" => "General Details change unsuccessful. Please try again"));
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change unsuccessful. Please try again"));
             }
         }
     }
 
-    public function accountdeleterequest()
+
+    public function contactnumberchange()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+          $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->contactnumberchange($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+            } else {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+            }
+        }
+    }
+
+
+
+    public function deleteaccount()
     {
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $tutor = $this->model('TutorModel');
             $data = json_decode(file_get_contents("php://input"), true);
-            if ($tutor->accountdeleterequest($data, $this->id)) {
-                $this->response(SUCCESS_RESPONSE, array("message" => "Account Deletion Request Sent Successfully"));
+            if ($tutor->deleteaccount($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Account Delete request received Successfully"));
             } else {
-                $this->response(SUCCESS_RESPONSE, array("message" => "Account Deletion Request Failed. Please try again"));
+                $this->response(SUCCESS_RESPONSE, array("message" => "Operation Unsuccessful. Please try again"));
             }
         }
     }

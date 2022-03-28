@@ -63,6 +63,58 @@ class StudentModel extends Model
 
 
 
+       public function contactnumberchange($data, $userid)
+          {
+
+                  $this->db->query("UPDATE user SET phoneno = :phoneno WHERE userid = :userid");
+                  $this->db->bind(":userid", $userid);
+                  $this->db->bind(":phoneno", $data['contactnumber']);
+                  if ($this->db->execute()) {
+                      return true;
+                  } else {
+                      return false;
+                  }
+              }
+
+
+
+          public function emailchange($data, $userid)
+             {
+
+                     $this->db->query("UPDATE user SET email = :email WHERE userid = :userid");
+                     $this->db->bind(":userid", $userid);
+                     $this->db->bind(":email", $data['email']);
+                     if ($this->db->execute()) {
+                         return true;
+                     } else {
+                         return false;
+                     }
+                 }
+
+                 public function deleteaccount($data, $userid)
+                    {
+            
+
+                            $this->db->query("INSERT INTO accountdeleterequests (userid , complaint) values (:userid , :complaint)");
+                            $this->db->bind(":userid", $userid);
+                            $this->db->bind(":complaint", $data['deletereason']);
+
+                            if ($this->db->execute()){
+                                return true;
+                            } else {
+                                return false;
+                            }
+
+                        }
+                        
+
+
+
+
+
+
+
+
 
 
 

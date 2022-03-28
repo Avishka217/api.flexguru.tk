@@ -68,26 +68,6 @@ class TutorModel extends Model
     }
 
 
-
-    public function accountdeleterequest($data, $tuid)
-    {
-        $this->db->query("SELECT userid FROM " . $this->table . " where tuid = :tuid");
-        $this->db->bind(":tuid", $tuid);
-        $res = $this->db->resultSet();
-        $userid = $res[0]['userid'];
-        $this->db->query("INSERT INTO accountdeleterequests (userid,contactnumber,email,complaint) VALUES (:userid,:contactnumber,:email,:complaint)");
-        $this->db->bind(":userid", $userid);
-        $this->db->bind(":contactnumber", $data['contactnumber']);
-        $this->db->bind(":email", $data['email']);
-        $this->db->bind(":complaint", $data['complaint']);
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
     public function addcomplaint($data, $userid)
     {
 
@@ -107,6 +87,50 @@ class TutorModel extends Model
             return false;
         }
     }
+
+    public function contactnumberchange($data, $userid)
+       {
+
+               $this->db->query("UPDATE user SET phoneno = :phoneno WHERE userid = :userid");
+               $this->db->bind(":userid", $userid);
+               $this->db->bind(":phoneno", $data['contactnumber']);
+               if ($this->db->execute()) {
+                   return true;
+               } else {
+                   return false;
+               }
+           }
+
+
+
+       public function emailchange($data, $userid)
+          {
+
+                  $this->db->query("UPDATE user SET email = :email WHERE userid = :userid");
+                  $this->db->bind(":userid", $userid);
+                  $this->db->bind(":email", $data['email']);
+                  if ($this->db->execute()) {
+                      return true;
+                  } else {
+                      return false;
+                  }
+              }
+
+    public function deleteaccount($data, $userid)
+    {
+
+
+        $this->db->query("INSERT INTO accountdeleterequests (userid , complaint) values (:userid , :complaint)");
+        $this->db->bind(":userid", $userid);
+        $this->db->bind(":complaint", $data['deletereason']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function getTutor($tutoruserid)
     {
@@ -140,4 +164,5 @@ class TutorModel extends Model
         $this->db->execute();
         return $this->db->resultSet();
     }
+
 }
