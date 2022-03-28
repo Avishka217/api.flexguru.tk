@@ -198,9 +198,9 @@ class Tutor extends Controller
             $tutor = $this->model('TutorModel');
             $data = json_decode(file_get_contents("php://input"), true);
             if ($tutor->deleteaccount($data, $this->id)) {
-                $this->response(SUCCESS_RESPONSE, array("message" => "Password Changed Successfully"));
+                $this->response(SUCCESS_RESPONSE, array("message" => "Account Delete request received Successfully"));
             } else {
-                $this->response(SUCCESS_RESPONSE, array("message" => "Password change Unsuccessful. Please try again"));
+                $this->response(SUCCESS_RESPONSE, array("message" => "Operation Unsuccessful. Please try again"));
             }
         }
     }

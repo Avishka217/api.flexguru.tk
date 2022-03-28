@@ -87,25 +87,22 @@ class AffiliateModel extends Model
                      }
                  }
 
-                 public function deleteaccount($data, $userid)
-                    {
-                            $this->db-query("SELECT phoneno,email from user where userid=:userid");
-                            $this->db->bind(":userid",$userid);
-                            $response = $this->db->resultSet();
-                            $email = $response['email'];
-                            $phoneno = $response['phoneno'];
-                            $this->db->query("INSERT INTO accountdeleterequests (userid,email,contactnumber,complaint) values (:userid , :complaint , :email ,:contactnumber)");
-                            $this->db->bind(":userid", $userid);
-                            $this->db->bind(":complaint", $data['deletereason']);
-                              $this->db->bind(":email", $email);
-                                $this->db->bind(":contactnumber", $phoneno);
-                            if ($this->db->execute()) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        }
 
+                 
+    public function deleteaccount($data, $userid)
+    {
+
+
+        $this->db->query("INSERT INTO accountdeleterequests (userid , complaint) values (:userid , :complaint)");
+        $this->db->bind(":userid", $userid);
+        $this->db->bind(":complaint", $data['deletereason']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 

@@ -68,24 +68,7 @@ class TutorModel extends Model
 
 
 
-    public function accountdeleterequest($data,$tuid)
-    {
-        $this->db->query("SELECT userid FROM " . $this->table . " where tuid = :tuid");
-        $this->db->bind(":tuid", $tuid);
-        $res = $this->db->resultSet();
-        $userid = $res[0]['userid'];
-        $this->db->query("INSERT INTO accountdeleterequests (userid,contactnumber,email,complaint) VALUES (:userid,:contactnumber,:email,:complaint)");
-        $this->db->bind(":userid", $userid);
-        $this->db->bind(":contactnumber", $data['contactnumber']);
-        $this->db->bind(":email", $data['email']);
-        $this->db->bind(":complaint", $data['complaint']);
-        if ($this->db->execute()) {
-            return true;
-        } else {
-            return false;
-        }
 
-    }
 
 
     public function addcomplaint($data, $userid)
@@ -136,25 +119,20 @@ class TutorModel extends Model
                   }
               }
 
-              public function deleteaccount($data, $userid)
-                 {
-                         $this->db-query("SELECT phoneno,email from user where userid=:userid");
-                         $this->db->bind(":userid",$userid);
-                         $response = $this->db->resultSet();
-                         $email = $response['email'];
-                         $phoneno = $response['phoneno'];
-                         $this->db->query("INSERT INTO accountdeleterequests (userid,email,contactnumber,complaint) values (:userid , :complaint , :email ,:contactnumber)");
-                         $this->db->bind(":userid", $userid);
-                         $this->db->bind(":complaint", $data['deletereason']);
-                           $this->db->bind(":email", $email);
-                             $this->db->bind(":contactnumber", $phoneno);
-                         if ($this->db->execute()) {
-                             return true;
-                         } else {
-                             return false;
-                         }
-                     }
+    public function deleteaccount($data, $userid)
+    {
 
+
+        $this->db->query("INSERT INTO accountdeleterequests (userid , complaint) values (:userid , :complaint)");
+        $this->db->bind(":userid", $userid);
+        $this->db->bind(":complaint", $data['deletereason']);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 
