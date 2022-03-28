@@ -224,4 +224,30 @@ class Tutor extends Controller
             }
         }
     }
+
+    public function gigsettings()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $tutor = $this->model('Service');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($gigdata = $tutor->getGigByTutor($data)) {
+                $this->response(SUCCESS_RESPONSE, $gigdata);
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    }
+
+    public function editgig()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $tutor = $this->model('TutorModel');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($tutor->editgig($data, $this->id)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => "Gig updated successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    }
 }
