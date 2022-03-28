@@ -19,7 +19,7 @@ class TutorModel extends Model
         return $this->db->resultSet();
     }
 
- public function passwordchange($data, $userid)
+    public function passwordchange($data, $userid)
     {
 
         $this->db->query("SELECT * FROM user where userid = :userid AND password= :password");
@@ -40,8 +40,9 @@ class TutorModel extends Model
         }
     }
 
-    public function generaldetailschange($data,$tuid){
-        $this->db->query("SELECT userid FROM ".$this->table." where tuid = :tuid");
+    public function generaldetailschange($data, $tuid)
+    {
+        $this->db->query("SELECT userid FROM " . $this->table . " where tuid = :tuid");
         $this->db->bind(":tuid", $tuid);
         $res = $this->db->resultSet();
         $userid = $res[0]['userid'];
@@ -52,7 +53,7 @@ class TutorModel extends Model
         $this->db->execute();
         if ($this->db->rowCount() > 0) {
             return false;
-        }else{
+        } else {
 
             $this->db->query("UPDATE user SET email = :email , phoneno = :phone where userid = :userid");
             $this->db->bind(":email", $data['email']);
@@ -63,12 +64,8 @@ class TutorModel extends Model
             } else {
                 return false;
             }
+        }
     }
-}
-
-
-
-
 
 
     public function addcomplaint($data, $userid)
@@ -78,7 +75,7 @@ class TutorModel extends Model
         $this->db->query("INSERT INTO complaint (userid,email,contactnumber,complainttype,complaint) VALUES (:userid , :email ,:contactnumber,:complainttype, :complaint )");
         //Bind data
         $this->db->bind(":userid", $userid);
-        $this->db->bind(":contactnumber",$data['contactnumber']);
+        $this->db->bind(":contactnumber", $data['contactnumber']);
         $this->db->bind(":email", $data['email']);
         $this->db->bind(":complainttype", $data['complainttype']);
         // $this->db->bind(":complaintdate", $data['complaintdate']);
@@ -135,10 +132,37 @@ class TutorModel extends Model
     }
 
 
+    public function getTutor($tutoruserid)
+    {
+        //Query
+        $this->db->query("SELECT u.userid, u.username, u.lastname, u.email, u.startdate, u.phoneno, u.city, u.role, u.photourl, u.dob, u.subscription, u.gender, u.bio  FROM api.user u where userid = :userid;");
+        //Bind data
+        $this->db->bind(":userid", $tutoruserid);
+        //Return result set
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
 
+    public function getClassDetails($tutoruserid)
+    {
+        // get class details from database
+        $this->db->query("SELECT avg(cls.turating) as rating, count(*) as jobs FROM api.class cls, api.tutor tu WHERE cls.tutid = tu.tuid and tu.userid = :userid and cls.status = 'completed'");
+        //Bind data
+        $this->db->bind(":userid", $tutoruserid);
+        //Return result set
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
 
-
-
-
+    public function getTutorReviews($tutoruserid)
+    {
+        // get class details from database
+        $this->db->query("SELECT u.username as student, u.photourl, u.firstname, u.lastname, cls.turating as rating, cls.tureview as review FROM api.class cls, api.tutor tu, api.student stu, api.user u WHERE cls.tutid = tu.tuid and tu.userid = :userid and cls.status = 'completed' and cls.stuid = stu.stid and stu.userid = u.userid");
+        //Bind data
+        $this->db->bind(":userid", $tutoruserid);
+        //Return result set
+        $this->db->execute();
+        return $this->db->resultSet();
+    }
 
 }

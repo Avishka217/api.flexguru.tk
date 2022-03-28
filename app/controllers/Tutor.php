@@ -205,13 +205,23 @@ class Tutor extends Controller
         }
     }
 
-
-
-
-
-
-
-
-
-
+    public function getTutor()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $tutor = $this->model('TutorModel');
+            $tutorresult = $tutor->getTutor($this->id);
+            $classresult = $tutor->getClassDetails($this->id);
+            $reviews = $tutor->getTutorReviews($this->id);
+            $result = [
+                'tutor' => $tutorresult,
+                'class' => $classresult,
+                'reviews' => $reviews
+            ];
+            if ($result) {
+                $this->response(SUCCESS_RESPONSE, $result);
+            } else {
+                $this->response(SERVER_ERROR, array('message' => "Something went wrong!"));
+            }
+        }
+    }
 }
