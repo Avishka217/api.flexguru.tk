@@ -259,4 +259,167 @@ class Admin extends Controller
             }
         }
     }
+    public function allclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->allclasses();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['id'] = $user['id'];
+                $u['type'] = $user['type'];
+                $u['tutid'] = $user['tutid'];
+                $u['purchasedate'] = $user['purchasedate'];
+                $u['deadline'] = $user['deadline'];
+                $u['status'] = $user['status'];
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function pendingclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->pendingclasses();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['id'] = $user['id'];
+                $u['type'] = $user['type'];
+                $u['tutid'] = $user['tutid'];
+                $u['purchasedate'] = $user['purchasedate'];
+                $u['deadline'] = $user['deadline'];
+                $u['status'] = $user['status'];
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function expiredclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->expiredclasses();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['id'] = $user['id'];
+                $u['type'] = $user['type'];
+                $u['tutid'] = $user['tutid'];
+                $u['purchasedate'] = $user['purchasedate'];
+                $u['deadline'] = $user['deadline'];
+                $u['status'] = $user['status'];
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function completedclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->completedclasses();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['id'] = $user['id'];
+                $u['type'] = $user['type'];
+                $u['tutid'] = $user['tutid'];
+                $u['purchasedate'] = $user['purchasedate'];
+                $u['deadline'] = $user['deadline'];
+                $u['status'] = $user['status'];
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function gigclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->gigclasses();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['id'] = $user['id'];
+                $u['type'] = $user['type'];
+                $u['tutid'] = $user['tutid'];
+                $u['purchasedate'] = $user['purchasedate'];
+                $u['deadline'] = $user['deadline'];
+                $u['status'] = $user['status'];
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function ssrclasses()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->ssrclasses();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['id'] = $user['id'];
+                $u['type'] = $user['type'];
+                $u['tutid'] = $user['tutid'];
+                $u['purchasedate'] = $user['purchasedate'];
+                $u['deadline'] = $user['deadline'];
+                $u['status'] = $user['status'];
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function pendingtutors()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "GET") {
+            $users = $this->admin->pendingtutors();
+            $data = array();
+            $u = [];
+            foreach ($users as $user) {
+                $u['tutid'] = $user['tutid'];
+                $u['userid'] = $user['userid'];
+                $u['subjects'] = $user['subjects'];
+                $u['workplace'] = $user['workplace'];
+                $u['occupation'] = $user['occupation'];
+                $u['qualification'] = $user['qualification'];
+                $u['file'] = 'http://localhost/flexguru/uploads/verifications/' . $user['file'];
+                $u['status'] = $user['status'];
+                if (boolval($user['verified'])) {
+                    $u['verified'] = true;
+                } else {
+                    $u['verified'] = false;
+                };
+                array_push($data, $u);
+            }
+            $this->response(SUCCESS_RESPONSE, $data);
+        }
+    }
+
+    public function accepttutor()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($this->admin->accepttutor($data)) {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Tutor Accepted Successfully.'));
+            } else {
+                $this->response(SERVER_ERROR, array('message' => 'Tutor Accept Unsuccessfull!.'));
+            }
+        }
+    }
+
+    public function declinetutor()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($this->admin->declinetutor($data)) {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Tutor Declined Successfully.'));
+            } else {
+                $this->response(SERVER_ERROR, array('message' => 'Tutor Decline Unsuccessfull!.'));
+            }
+        }
+    }
 }

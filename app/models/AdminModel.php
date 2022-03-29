@@ -68,6 +68,70 @@ class AdminModel extends Model
         return $this->db->resultSet();
     }
 
+    // CLASSES STARTS HERE
+
+    public function allclasses()
+    {
+        //Create query 
+        $this->db->query('SELECT classid as id, type, tutid, date(purchasedate) as purchasedate, date(deadline) as deadline, status FROM api.class order by id desc;');
+        //Bind data
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    public function completedclasses()
+    {
+        //Create query 
+        $this->db->query("SELECT classid as id, type, tutid, date(purchasedate) as purchasedate, date(deadline) as deadline, status FROM api.class where status = 'completed' order by id desc;");
+        //Bind data
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    public function pendingclasses()
+    {
+        //Create query 
+        $this->db->query("SELECT classid as id, type, tutid, date(purchasedate) as purchasedate, date(deadline) as deadline, status FROM api.class where status = 'pending' order by id desc;");
+        //Bind data
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    public function expiredclasses()
+    {
+        //Create query 
+        $this->db->query("SELECT classid as id, type, tutid, date(purchasedate) as purchasedate, date(deadline) as deadline, status FROM api.class where status = 'expired' order by id desc;");
+        //Bind data
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    public function gigclasses()
+    {
+        //Create query 
+        $this->db->query("SELECT classid as id, type, tutid, date(purchasedate) as purchasedate, date(deadline) as deadline, status FROM api.class where type = 'gig' order by id desc;");
+        //Bind data
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    public function ssrclasses()
+    {
+        //Create query 
+        $this->db->query("SELECT classid as id, type, tutid, date(purchasedate) as purchasedate, date(deadline) as deadline, status FROM api.class where type = 'ssr' order by id desc;");
+        //Bind data
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    // CLASSES ENDS HERE 
+
     public function allgigs()
     {
         //Create query 
@@ -130,6 +194,45 @@ class AdminModel extends Model
         $this->db->query("UPDATE api.servicegig SET status = 'inactive' WHERE gigid = :gigid and status = 'pending';");
         // Bind values
         $this->db->bind(':gigid', $gigid);
+        // Execute
+        $this->db->execute();
+
+        if ($this->db->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function pendingtutors()
+    {
+        // Update gig status to active
+        $this->db->query("SELECT tuid as tutid, userid, subjects, workplace, occupation, qualification, files as file, status, verified FROM api.tutor where status = 'pending' order by tutid desc;");
+        $this->db->execute();
+        //Return result set
+        return $this->db->resultSet();
+    }
+
+    public function declinetutor($tutorid)
+    {
+        $this->db->query("UPDATE `api`.`tutor` SET `status` = 'declined' WHERE (`tuid` = :tutorid and `status`= 'pending');");
+        // Bind values
+        $this->db->bind(':tutorid', $tutorid);
+        // Execute
+        $this->db->execute();
+
+        if ($this->db->rowCount()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function accepttutor($tutorid)
+    {
+        $this->db->query("UPDATE `api`.`tutor` SET `status` = 'verified' WHERE (`tuid` = :tutorid and `status`= 'pending');");
+        // Bind values
+        $this->db->bind(':tutorid', $tutorid);
         // Execute
         $this->db->execute();
 
