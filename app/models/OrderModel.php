@@ -201,4 +201,23 @@ class OrderModel extends Model
             return false;
         }
     }
+
+    public function studentrating($stuid)
+    {
+        try {
+            //Create query
+            $this->db->query('SELECT avg(cls.sturating) as sturating, count(cls.sturating) as stuclasses  FROM api.class cls where cls.stuid = :stuid;');
+
+            //Bind values
+            $this->db->bind(':stuid', $stuid);
+            //Execute function
+            if ($this->db->execute()) {
+                return $this->db->resultSet();
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
