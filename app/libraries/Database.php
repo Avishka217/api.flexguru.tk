@@ -147,4 +147,10 @@ class Database
             return false;
         }
     }
+
+    //Affected Rows
+    public function affectedRows()
+    {
+        return $this->dbHandler->affected_rows;
+    }
 }
