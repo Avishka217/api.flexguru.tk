@@ -29,6 +29,25 @@ class SpecialService extends Model
             }
         } catch (PDOException $e) {
             return false;
-        }
+        }  
+        
     }
+
+    public function read()
+    {
+      try{
+      $this->db->query("SELECT * FROM `api`.`specialservicerequest` where status = 'pending' ORDER BY serviceid DESC; ");
+      $this->db->execute();
+      if ($this->db->execute()) {
+        return $this->db->resultSet();
+      } else {
+        return false;
+      }  
+      } catch (PDOException $e) {
+      return false;
+    }  
+ 
+    }
+
+  
 }

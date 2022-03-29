@@ -29,4 +29,17 @@ class SSR extends Controller
       }
     }
   }
+
+  public function read()
+  {
+    if ($_SERVER['REQUEST_METHOD'] = "GET") {
+
+      if ($result = $this->model('SpecialService')->read()) {
+        $this->response(SUCCESS_RESPONSE,$result);
+      } else {
+        $this->response(SERVER_ERROR, array('message' => 'Special Services Message Read Failed.'));
+      }
+    }
+  }
+
 }
