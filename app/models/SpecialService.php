@@ -20,7 +20,7 @@ class SpecialService extends Model
             $this->db->bind(':medium', $data['medium']);
             $this->db->bind(':subject', $data['subject']);
             $this->db->bind(':lesson', $data['lesson']);
-
+            $this->db->execute();
             // Execute
             if ($this->db->execute()) {
                 return true;
