@@ -250,4 +250,21 @@ class Tutor extends Controller
             }
         }
     }
+
+    public function createcustomoffer()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $ssr = $this->model('SpecialService');
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($ssr->createcustomoffer($data)) {
+                $this->response(SUCCESS_RESPONSE, array("message" => " Custom offer added successfully!"));
+            } else {
+                $this->response(SERVER_ERROR, array("message" => "Something went wrong!"));
+            }
+        }
+    }
+
+
+
+
 }
