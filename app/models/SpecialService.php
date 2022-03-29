@@ -52,8 +52,8 @@ class SpecialService extends Model
     public function createcustomoffer($data)
     {
         try {
-            $this->db->query("INSERT INTO `api`.`customoffers` (`stid`,`tuid`,`title`, `description`, `price`, `duration`,`revisions`, `medium`,`method`, `subject`, `lesson`) VALUES (:stid,:tuid, :title, :description, :price, :duration,:revisions, :medium,:method , :subject, :lesson);");
-            $this->db->bind(':stid', $data['stid']);
+          $this->db->query("INSERT INTO `api`.`customoffer` (`tuid`, `title`, `description`, `price`, `duration`, `revisions`, `medium`, `method`, `subject`, `lesson`) VALUES (:tuid, :title, :description, :price, :duration,:revisions ,:medium  ,:method  ,:subject , :lesson);");
+          
             $this->db->bind(':tuid', $data['tuid']);
             $this->db->bind(':title', $data['title']);
             $this->db->bind(':description', $data['description']);
@@ -64,7 +64,6 @@ class SpecialService extends Model
             $this->db->bind(':method', $data['method']);
             $this->db->bind(':subject', $data['subject']);
             $this->db->bind(':lesson', $data['lesson']);
-          
             // Execute
             if ($this->db->execute()) {
                 return true;
@@ -74,6 +73,7 @@ class SpecialService extends Model
         } catch (PDOException $e) {
             return false;
         }
+   
     }
 
 
