@@ -37,9 +37,33 @@ class Gig extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = json_decode(file_get_contents("php://input"), true);
             if ($this->model('Service')->delete($data)) {
-                $this->response(SUCCESS_RESPONSE, array('message' => 'Service Deleted Successfully.'));
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Service Deactivated Successfully.'));
             } else {
-                $this->response(SERVER_ERROR, array('message' => 'Service Deleting Failed.'));
+                $this->response(SERVER_ERROR, array('message' => 'Service Deactivated Failed.'));
+            }
+        }
+    }
+
+    public function update()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($this->model('Service')->update($data)) {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Service Updated Successfully.'));
+            } else {
+                $this->response(SERVER_ERROR, array('message' => 'Service Update Failed.'));
+            }
+        }
+    }
+
+    public function activate()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($this->model('Service')->activate($data)) {
+                $this->response(SUCCESS_RESPONSE, array('message' => 'Service Activated Successfully.'));
+            } else {
+                $this->response(SERVER_ERROR, array('message' => 'Service Activation Failed.'));
             }
         }
     }
